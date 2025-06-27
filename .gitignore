@@ -1,0 +1,19 @@
+# Node modules
+frontend/node_modules/
+
+# Python virtual environment
+backend/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# VS Code or IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Resume output
+backend/saved_resume.json
