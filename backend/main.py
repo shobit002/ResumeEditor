@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+import json
+import os
 
 app = FastAPI()
 
@@ -20,17 +22,25 @@ class SectionInput(BaseModel):
 class Resume(BaseModel):
     data: dict
 
-# Mock AI Enhance API
+RESUME_FILE = "saved_resume.json"
+
 @app.post("/ai-enhance")
 def ai_enhance(data: SectionInput):
+    # Placeholder logic – can later connect to OpenAI or HuggingFace
     return {
-        "enhanced_content": f"Enhanced version of: {data.content}"
+        "enhanced_content": f"✨ Enhanced: {data.content}"
     }
 
-# Save Resume API
 @app.post("/save-resume")
 def save_resume(resume: Resume):
-    import json
-    with open("saved_resume.json", "w") as f:
-        json.dump(resume.data, f)
+    with open(RESUME_FILE, "w") as f:
+        json.dump(resume.data, f, indent=2)
     return {"status": "saved"}
+
+@app.get("/get-resume")
+def get_resume():
+    if os.path.exists(RESUME_FILE):
+        with open(RESUME_FILE, "r") as f:
+            data = json.load(f)
+        return {"resume": data}
+    return {"resume": {}}

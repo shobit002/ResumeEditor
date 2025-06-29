@@ -1,38 +1,252 @@
+/* Base Reset */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f6f8;
+  transition: background 0.3s, color 0.3s;
+}
+
+body, input, textarea, select, button {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Layout */
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  padding: 40px;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Editor and Preview Boxes */
+.form-section,
+.preview-section {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  flex: 1;
+  min-width: 320px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.settings {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 12px 20px;
+  background: #ffffff;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  gap: 20px;
+  z-index: 1000;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Headings */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #003366;
+  margin-top: 60px;
+}
+
+h2 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: #002244;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 4px;
+}
+
+/* Inputs */
+input, textarea, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Buttons */
+button {
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: 10px;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background-color: #003d80;
+}
+
+.array-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
-.App-link {
-  color: #61dafb;
+/* File Input */
+input[type="file"] {
+  margin-top: 12px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Preview Section Styles */
+.preview-section a {
+  color: #0056b3;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.preview-section a:hover {
+  text-decoration: underline;
+}
+
+.preview-section p,
+.preview-section li {
+  line-height: 1.6;
+  margin: 6px 0;
+}
+
+.preview-section ul {
+  padding-left: 20px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.preview-section h2 {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+  color: #002244;
+}
+
+/* Theming */
+.preview-light {
+  background: #ffffff;
+  color: #000000;
+}
+
+.preview-dark {
+  background: #1a1a1a;
+  color: #f1f1f1;
+}
+
+.preview-dark a {
+  color: #80bfff;
+}
+
+.preview-modern {
+  background: #fdf6e3;
+  color: #333333;
+}
+
+.preview-modern a {
+  color: #2aa198;
+}
+
+/* Dark Mode */
+.App.dark {
+  background: #121212;
+}
+
+.App.dark .form-section,
+.App.dark .preview-section,
+.App.dark .settings {
+  background: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.App.dark input,
+.App.dark textarea,
+.App.dark select {
+  background: #2c2c2c;
+  color: #e0e0e0;
+  border: 1px solid #444;
+}
+
+.App.dark button {
+  background-color: #337ab7;
+}
+
+.App.dark button:hover {
+  background-color: #235a9e;
+}
+
+.App.dark h1,
+.App.dark h2 {
+  color: #c0d8f0;
+}
+
+/* Responsive Layout */
+@media screen and (max-width: 1024px) {
+  .App {
+    flex-direction: column;
+    padding: 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .form-section,
+  .preview-section {
+    width: 100%;
+  }
+
+  .settings {
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-bottom: 10px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .settings,
+  .form-section,
+  button,
+  input,
+  textarea,
+  select {
+    display: none !important;
+  }
+
+  .App {
+    padding: 0;
+  }
+
+  .preview-section {
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: white !important;
+    color: black !important;
+    width: 100%;
+  }
+
+  .preview-section h1,
+  .preview-section h2,
+  .preview-section p,
+  .preview-section ul,
+  .preview-section li {
+    color: black !important;
   }
 }
